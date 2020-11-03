@@ -1,0 +1,392 @@
+<template>
+  <main class="container">
+    <div class="container__logo">
+      <img
+        src="https://www.rivm.nl/themes/custom/sdv_theme/logo.svg"
+        alt="Niet het logo van het RIVM"
+      />
+    </div>
+    <div class="container__rutte js-animation">
+      <img src="@/assets/images/mark_rutte.png" alt="DE MARK" />
+    </div>
+    <div class="container__video">
+      <video src="@/assets/images/video.mp4"></video>
+    </div>
+    <div class="container__grid">
+      <div
+        v-for="letter in title"
+        :key="letter.id"
+        class="container__letter"
+        :class="letter"
+      >
+        {{ letter }}
+      </div>
+      <button
+        v-for="item in items"
+        :key="item.id"
+        class="container__item"
+        @click="
+          item.pressed = true
+          playAudio()
+        "
+      >
+        <p>{{ item.description }}</p>
+        <transition
+          :css="false"
+          @before-enter="beforeEnterAnimation"
+          @enter="enterAnimation"
+        >
+          <span
+            v-if="item.pressed"
+            :style="
+              'transform: translate(-50%, -50%) ' +
+              'rotate(' +
+              item.rotation +
+              'deg)'
+            "
+            >X</span
+          >
+        </transition>
+      </button>
+    </div>
+
+    <audio src="buzzer.mp3"></audio>
+  </main>
+</template>
+
+<script>
+import { gsap } from 'gsap'
+
+export default {
+  data() {
+    return {
+      counter: 0,
+      title: ['B', 'I', 'N', 'G', 'O'],
+      items: [
+        {
+          description: 'Tweede golf breken',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Samen',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Basisscholen en middelbare scholen',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Besmettingen lopen op',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Ziekenhuizen',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: "'Dan geef ik nu het woord aan Hugo de Jonge'",
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: "In overleg met de veiligheidsregio's",
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Horeca',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Amateursport',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Mondkapjes',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Wintersport',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: "'Goedenavond'",
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Lockdown van maart',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'OMT',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Reguliere zorg',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Reisbewegingen beperken',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Ondernemers',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: "IC's",
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Burgemeesters',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Moeilijke tijd',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Noodzakelijke reizen',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Groepsgrootte beperken',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Basisregels',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Thuiswerken',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'Irma 😍',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+      ],
+    }
+  },
+
+  methods: {
+    beforeEnterAnimation(el) {
+      gsap.set(el, { autoAlpha: 0 })
+    },
+
+    enterAnimation(el, done) {
+      gsap.to(el, { autoAlpha: 1, ease: 'back', duration: 1.2 })
+      done()
+    },
+
+    playAudio() {
+      const audio = document.querySelector('audio')
+      this.counter++
+      audio.play()
+
+      if (this.counter === 8) {
+        const bingoLetter = this.$el.querySelector('.O')
+        bingoLetter.textContent = ''
+        bingoLetter.style.backgroundSize = 'cover'
+        bingoLetter.style.backgroundPosition = 'center'
+        bingoLetter.style.backgroundImage =
+          "url('https://www.vkmag.com/images/vk_thumbs/79041/thumb_fl_remix__vk_thumb_item.jpg')"
+      }
+
+      if (this.counter === 12) {
+        this.animationHandler()
+      }
+
+      if (this.counter === 18) {
+        const videoContainer = this.$el.querySelector('.container__video')
+        const video = videoContainer.querySelector('video')
+        gsap.set(videoContainer, { autoAlpha: 1 })
+        video.play()
+      }
+    },
+
+    animationHandler() {
+      const target = this.$el.querySelector('.js-animation')
+      const tl = gsap.timeline()
+
+      tl.to(target, { yPercent: -50 }).to(target, { yPercent: 0, delay: 5 })
+    },
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+$color-red: #721817;
+$color-yellow: #fa9f42;
+$color-blue: #2b4162;
+$color-green: #0b6e4f;
+$color-white: #e0e0e2;
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  background-color: $color-yellow;
+
+  &__logo {
+    position: absolute;
+    top: 0;
+    left: 47.5%;
+
+    &::after {
+      content: 'SASSAS PerscoBingo';
+      position: absolute;
+      color: white;
+      left: 120%;
+      top: 20%;
+      font-size: 1.5rem;
+    }
+  }
+
+  &__rutte {
+    z-index: 1;
+    position: absolute;
+    top: 10%;
+    left: 20%;
+  }
+
+  &__video {
+    z-index: 20;
+    position: absolute;
+    display: grid;
+    place-items: center;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    pointer-events: none;
+    opacity: 0;
+
+    & video {
+      width: 100%;
+      height: calc(100% * 16 / 9);
+    }
+  }
+
+  &__heading {
+    color: white;
+    font-size: 3rem;
+    width: 100vw;
+    height: 20vh;
+    display: grid;
+    place-items: center;
+  }
+
+  &__letter {
+    display: grid;
+    place-items: center;
+    color: white;
+    border: 3px solid black;
+    font-size: 2rem;
+  }
+
+  &__grid {
+    position: relative;
+    z-index: 2;
+    margin: 0 auto;
+    padding-top: 10vh;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    width: 80vw;
+    height: 90vh;
+    text-align: center;
+  }
+
+  &__item {
+    background-color: white;
+    color: $color-blue;
+    border: 3px solid black;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 1rem;
+    position: relative;
+    font-weight: bold;
+
+    & span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: $color-red;
+      font-size: 5rem;
+    }
+  }
+}
+
+.B {
+  background-color: $color-blue;
+}
+
+.I {
+  background-color: $color-green;
+}
+
+.N {
+  background-color: $color-red;
+}
+
+.G {
+  background-color: purple;
+}
+
+.O {
+  background-color: rgb(255, 187, 0);
+}
+
+button {
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+
+  /* inherit font & color from ancestor */
+  color: inherit;
+  font: inherit;
+
+  /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+  line-height: normal;
+
+  /* Corrects font smoothing for webkit */
+  -webkit-font-smoothing: inherit;
+  -moz-osx-font-smoothing: inherit;
+
+  /* Corrects inability to style clickable `input` types in iOS */
+  -webkit-appearance: none;
+}
+
+button:focus {
+  outline: none;
+}
+</style>
