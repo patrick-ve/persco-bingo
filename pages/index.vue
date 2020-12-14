@@ -60,16 +60,17 @@ import { gsap } from 'gsap'
 export default {
   data() {
     return {
+      AUDIO_ALLOWED: true,
       counter: 0,
       title: ['B', 'I', 'N', 'G', 'O'],
       items: [
         {
-          description: 'Tweede golf breken',
+          description: 'Derde golf',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Samen',
+          description: 'Het gaat niet goed',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
@@ -89,7 +90,7 @@ export default {
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: "'Dan geef ik nu het woord aan Hugo de Jonge'",
+          description: '"Dan geef ik nu het woord aan Hugo de Jonge"',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
@@ -104,12 +105,12 @@ export default {
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Amateursport',
+          description: 'Kerstvakantie',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Mondkapjes',
+          description: 'Feestdagen',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
@@ -119,17 +120,17 @@ export default {
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: "'Goedenavond'",
+          description: '"Goedenavond"',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Lockdown van maart',
+          description: '19 januari',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'OMT',
+          description: '"Ik heb geen goed nieuws voor u"',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
@@ -154,7 +155,7 @@ export default {
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Burgemeesters',
+          description: 'Avondklok',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
@@ -203,9 +204,13 @@ export default {
     },
 
     playAudio() {
-      const audio = document.querySelector('audio')
       this.counter++
-      audio.play()
+      const audio = document.querySelector('audio')
+      if (this.AUDIO_ALLOWED) {
+        audio.play()
+      } else {
+        return
+      }
 
       if (this.counter === 8) {
         const bingoLetter = this.$el.querySelector('.O')
@@ -220,15 +225,25 @@ export default {
         this.animationHandler()
       }
 
-      if (this.counter === 18) {
+      if (this.counter === 25) {
         const videoContainer = this.$el.querySelector('.container__video')
         const video = videoContainer.querySelector('video')
         gsap.set(videoContainer, { autoAlpha: 1 })
         video.play()
       }
+
+      if (this.counter === 5) {
+        const fifthLetter = this.$el.querySelector(
+          '.container__letter:nth-of-type(4)'
+        )
+        fifthLetter.textContent = '5G'
+      }
     },
 
     animationHandler() {
+      const deviceWidth = window.innerWidth
+      if (deviceWidth < 480) return
+
       const target = this.$el.querySelector('.js-animation')
       const tl = gsap.timeline()
 
@@ -258,12 +273,13 @@ $color-white: #e0e0e2;
     left: 47.5%;
 
     &::after {
-      content: 'SASSAS PerscoBingo';
+      content: 'Alleen samen krijgen we corona PerscoBingo';
       position: absolute;
       color: white;
       left: 120%;
       top: 20%;
       font-size: 1.5rem;
+      width: 20rem;
     }
   }
 
@@ -388,5 +404,28 @@ button {
 
 button:focus {
   outline: none;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .container__grid {
+    padding-top: 50vh;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1fr);
+  }
+
+  .container__item {
+    min-height: 20vh;
+  }
+
+  .container__rutte {
+    top: 0;
+    left: -40%;
+    transform: scale(0.5);
+  }
+
+  .container__logo::after {
+    font-size: 1rem;
+    width: 30vw;
+  }
 }
 </style>
