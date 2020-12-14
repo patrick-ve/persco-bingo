@@ -427,5 +427,12 @@ button:focus {
     font-size: 1rem;
     width: 30vw;
   }
+
+  .container__video {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 </style>
