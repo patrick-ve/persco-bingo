@@ -16,7 +16,7 @@ export default {
       },
       {
         name: 'theme-color',
-        content: '22416f',
+        content: '#22416f',
       },
     ],
     link: [
