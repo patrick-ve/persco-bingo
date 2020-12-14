@@ -14,6 +14,10 @@ export default {
         content:
           'Om corona toch wat draaglijk te maken, is er nu de corona persconferentie bingo.',
       },
+      {
+        name: 'theme-color',
+        content: '22416f',
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

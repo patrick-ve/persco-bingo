@@ -418,9 +418,9 @@ button:focus {
   }
 
   .container__rutte {
-    top: 0;
-    left: -40%;
-    transform: scale(0.5);
+    bottom: 50vh;
+    left: -25vw;
+    transform: scale(0.7);
   }
 
   .container__logo::after {
