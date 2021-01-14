@@ -65,127 +65,127 @@ export default {
       title: ['B', 'I', 'N', 'G', 'O'],
       items: [
         {
-          description: 'Derde golf',
+          description: 'Gejank over vaccins',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Het gaat niet goed',
+          description: 'Angstporno',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Basisscholen en middelbare scholen',
+          description: 'Ontwijkt als je om de bron vraagt',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Besmettingen lopen op',
+          description: 'begrijpt het concept van vvmu niet',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Ziekenhuizen',
+          description: '"Ik stel alleen maar vragen"',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: '"Dan geef ik nu het woord aan Hugo de Jonge"',
+          description: 'Ad hominem',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: "In overleg met de veiligheidsregio's",
+          description: 'doe je eigen onderzoek',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Horeca',
+          description: 'Gejank over Antifa/BLM',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Kerstvakantie',
+          description: 'Gejank over de NWO',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Feestdagen',
+          description: '"Ik heb wel wat beters te doen. Fijne avond verder"',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Wintersport',
+          description: '"Neem dat prikkie lekker"',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: '"Goedenavond"',
+          description: 'Gebruikt communisme als algemeen scheldwoord',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: '19 januari',
+          description: 'SCHAAP!!1',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: '"Ik heb geen goed nieuws voor u"',
+          description: '"Trump kan nog steeds winnen"',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Reguliere zorg',
+          description: '"deze huisarts zegt..."',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Reisbewegingen beperken',
+          description: 'Link naar NineForNews/Bataafse Courant/Random blogje',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Ondernemers',
+          description: 'Gejank over censuur',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: "IC's",
+          description: 'Great Reset',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Avondklok',
+          description: 'Wacht maar/we gaan het zien',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Moeilijke tijd',
+          description: '"Krijg je betaald om te tweeten?"',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Noodzakelijke reizen',
+          description: 'Agenda 21/30',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Groepsgrootte beperken',
+          description: '#OPRUTTE',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Basisregels',
+          description: 'Zegt geen MSM te volgen, comment onder elk NOS-artikel',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Thuiswerken',
+          description: 'mondluier',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Irma 😍',
+          description: 'VOLKSOPSTAND',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
@@ -273,7 +273,7 @@ $color-white: #e0e0e2;
     left: 47.5%;
 
     &::after {
-      content: 'Alleen samen krijgen we corona PerscoBingo';
+      content: 'De grote Corona Wappie Bingo';
       position: absolute;
       color: white;
       left: 120%;

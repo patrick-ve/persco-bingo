@@ -4,7 +4,7 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'Corona Persconferentie Bingo',
+    title: 'De grote Corona Wappie Bingo',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -12,7 +12,7 @@ export default {
         hid: 'description',
         name: 'description',
         content:
-          'Om corona toch wat draaglijk te maken, is er nu de corona persconferentie bingo.',
+          'Om corona toch wat draaglijk te maken, is er nu de corona wappie bingo.',
       },
       {
         name: 'theme-color',
