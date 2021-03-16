@@ -52,6 +52,8 @@
     <audio class="js-audio" src="buzzer.mp3"></audio>
     <audio class="js-audio" src="fart.mp3"></audio>
     <audio class="js-audio" src="x-files-theme.mp3"></audio>
+    <audio class="js-audio" src="clown_horn.mp3"></audio>
+    <audio class="js-circus" src="circus_theme.mp3"></audio>
   </main>
 </template>
 
@@ -239,6 +241,9 @@ export default {
         container.appendChild(canvas)
         this.duration = Date.now() + 10 * 1000
         this.confettiHandler()
+
+        const cirusTheme = this.$el.querySelector('.js-circus')
+        cirusTheme.play()
       }
     },
 
