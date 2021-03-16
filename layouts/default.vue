@@ -110,6 +110,7 @@ section {
 }
 body {
   line-height: 1;
+  cursor: url('~assets/images/illuminati_cursor.png'), auto;
 }
 ol,
 ul {

@@ -1,22 +1,21 @@
 <template>
   <main class="container">
     <div class="container__canvas"></div>
-
-    <div class="container__wappie container__wappie--jayjay js-jayjay"></div>
-    <div class="container__wappie container__wappie--jensen js-jensen"></div>
-    <div class="container__wappie container__wappie--baudet js-baudet"></div>
-    <div
-      class="container__wappie container__wappie--ossenbaard js-ossenbaard"
-    ></div>
-    <div class="container__wappie container__wappie--engel js-engel"></div>
-    <div class="container__wappie container__wappie--haga js-haga"></div>
-    <div class="container__wappie container__wappie--frans js-frans"></div>
-    <div class="container__wappie container__wappie--tinus js-tinus"></div>
-
     <div class="container__grid">
+      <div class="container__wappie container__wappie--jayjay js-jayjay"></div>
+      <div class="container__wappie container__wappie--jensen js-jensen"></div>
+      <div class="container__wappie container__wappie--baudet js-baudet"></div>
+      <div
+        class="container__wappie container__wappie--ossenbaard js-ossenbaard"
+      ></div>
+      <div class="container__wappie container__wappie--engel js-engel"></div>
+      <div class="container__wappie container__wappie--haga js-haga"></div>
+      <div class="container__wappie container__wappie--frans js-frans"></div>
+      <div class="container__wappie container__wappie--tinus js-tinus"></div>
+
       <span class="container__wap js-wap">WAP</span>
       <span class="container__pie js-pie">PIE</span>
-      <span class="container__bingo">BINGO</span>
+      <span class="container__bingo js-bingo">BINGO</span>
       <button
         v-for="item in items"
         :key="item.id"
@@ -65,7 +64,6 @@ import confetti from 'canvas-confetti'
 export default {
   data() {
     return {
-      AUDIO_ALLOWED: true,
       counter: 0,
       duration: null,
       items: [
@@ -236,6 +234,7 @@ export default {
     loadingAnimationHandler() {
       const wap = this.$el.querySelector('.js-wap')
       const pie = this.$el.querySelector('.js-pie')
+      const bingo = this.$el.querySelector('.js-bingo')
 
       gsap.to([wap, pie], {
         yPercent: -115,
@@ -243,12 +242,33 @@ export default {
         ease: 'expo.inOut',
         delay: 0.8,
       })
+
+      gsap.fromTo(
+        bingo,
+        {
+          // letterSpacing: '1px',
+          autoAlpha: 0,
+        },
+        {
+          // letterSpacing: '88px',
+          autoAlpha: 1,
+          duration: 2,
+          delay: 1.7,
+          ease: 'expo.inOut',
+        }
+      )
     },
 
     audioHandler(item) {
       item.pressed ? this.counter++ : this.counter--
 
       if (item.reset) {
+        if (this.counter >= 5) {
+          const bingo = this.$el.querySelector('.js-bingo')
+          bingo.textContent = 'BINGO'
+          gsap.to(bingo, { xPercent: 0 })
+        }
+
         this.counter = 0
 
         this.items.forEach((item) => {
@@ -264,6 +284,12 @@ export default {
         audioEffects[Math.floor(Math.random() * audioEffects.length)]
 
       randomAudio.play()
+
+      if (this.counter === 5) {
+        const bingo = this.$el.querySelector('.js-bingo')
+        bingo.textContent = '   5G'
+        gsap.to(bingo, { xPercent: 150 })
+      }
 
       if (this.counter === 24) {
         const canvas = document.createElement('canvas')
@@ -324,6 +350,10 @@ $color-blue: #2b4162;
 $color-green: #0b6e4f;
 $color-white: #e0e0e2;
 
+main {
+  cursor: url('/illuminati_cursor.png') !important;
+}
+
 .container {
   position: relative;
   width: 100vw;
@@ -365,10 +395,12 @@ $color-white: #e0e0e2;
 
   &__bingo {
     position: absolute;
-    bottom: -12.5%;
-    left: 10%;
+    bottom: -11.5%;
+    left: 12.5%;
     font-size: 5rem;
     letter-spacing: 88px;
+    opacity: 0;
+    visibility: hidden;
     color: red;
     z-index: 10;
   }
@@ -378,58 +410,59 @@ $color-white: #e0e0e2;
     width: 15vw;
     height: 15vw;
     background-size: cover;
+    z-index: -5;
 
     &--jayjay {
-      left: 20vw;
-      top: 0;
+      left: -17.5%;
+      top: -15%;
       background-image: url('~assets/images/Tisjeboy.png');
     }
 
     &--jensen {
-      left: 42.5vw;
-      top: 0;
+      left: 35%;
+      top: -15%;
       height: 7.5vw;
       width: 15vw;
       background-image: url('~assets/images/Robert_Jensen.png');
     }
 
     &--baudet {
-      right: 22.5vw;
-      top: 0;
+      right: -15%;
+      top: -15%;
       background-image: url('~assets/images/Thierry_Bidet.png');
     }
 
     &--ossenbaard {
-      right: 21.5vw;
-      top: 30vh;
+      right: -15%;
+      top: 30%;
       background-image: url('~assets/images/Janet_Ossebaard.png');
     }
 
     &--engel {
-      right: 20.5vw;
-      bottom: 0;
+      right: -20%;
+      bottom: -15%;
       height: 10vw;
       width: 15vw;
       background-image: url('~assets/images/Villain_Engel.png');
     }
 
     &--haga {
-      right: 42.5vw;
-      bottom: 0;
+      right: 35%;
+      bottom: -15%;
       height: 7.5vw;
       width: 15vw;
       background-image: url('~assets/images/Wybren_van_Haga.png');
     }
 
     &--frans {
-      left: 20vw;
-      bottom: 0;
+      left: -22.5%;
+      bottom: -15%;
       background-image: url('~assets/images/Lamme_Frans.png');
     }
 
     &--tinus {
-      left: 21vw;
-      bottom: 35vh;
+      left: -15%;
+      top: 30%;
       background-image: url('~assets/images/Staatsmongool_Tinus.png');
     }
   }
@@ -453,7 +486,6 @@ $color-white: #e0e0e2;
 
   &__grid {
     position: relative;
-    z-index: 2;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -461,7 +493,19 @@ $color-white: #e0e0e2;
     width: 80vh;
     height: 80vh;
     text-align: center;
-    border: 7px solid red;
+    z-index: 20;
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border: 7px solid red;
+      z-index: 50;
+      pointer-events: none;
+    }
   }
 
   &__item {
@@ -469,9 +513,9 @@ $color-white: #e0e0e2;
     color: black;
     border: 2px solid black;
     font-size: 1.25rem;
-    cursor: pointer;
     position: relative;
     font-weight: regular;
+    cursor: pointer;
 
     & p {
       display: block;
