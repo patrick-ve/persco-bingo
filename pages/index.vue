@@ -218,6 +218,10 @@ export default {
 
       if (item.reset) {
         this.counter = 0
+
+        const canvas = document.querySelector('canvas')
+        canvas.remove()
+
         this.items.forEach((item) => {
           item.pressed = false
         })
@@ -229,11 +233,7 @@ export default {
 
       randomAudio.play()
 
-      if (item.reset) {
-        this.counter = 0
-      }
-
-      if (this.counter === 5) {
+      if (this.counter === 24) {
         const canvas = document.createElement('canvas')
         const container = document.querySelector('.container__canvas')
         container.appendChild(canvas)
@@ -243,10 +243,10 @@ export default {
     },
 
     confettiHandler() {
-      const colors = ['#bb0000', '#ffffff']
+      const colors = ['#bb0000', '#ffff00', '#0000ff']
       const end = Date.now() + 10 * 1000
 
-      ;(function frame() {
+      ;(function animate() {
         confetti({
           particleCount: 2,
           angle: 60,
@@ -263,7 +263,7 @@ export default {
         })
 
         if (Date.now() < end) {
-          requestAnimationFrame(frame)
+          requestAnimationFrame(animate)
         }
       })()
     },
