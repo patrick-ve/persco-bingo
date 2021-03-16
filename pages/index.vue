@@ -4,6 +4,8 @@
     <span class="container__pie">PIE</span>
     <span class="container__bingo">BINGO</span>
 
+    <div class="container__canvas"></div>
+
     <div class="container__wappie container__wappie--jayjay js-jayjay"></div>
     <div class="container__wappie container__wappie--jensen js-jensen"></div>
     <div class="container__wappie container__wappie--baudet js-baudet"></div>
@@ -55,12 +57,14 @@
 
 <script>
 import { gsap } from 'gsap'
+import confetti from 'canvas-confetti'
 
 export default {
   data() {
     return {
       AUDIO_ALLOWED: true,
       counter: 0,
+      duration: null,
       items: [
         {
           description: '"...op persoonlijke titel"',
@@ -229,9 +233,39 @@ export default {
         this.counter = 0
       }
 
-      if (this.counter === 12) {
-        this.animationHandler()
+      if (this.counter === 5) {
+        const canvas = document.createElement('canvas')
+        const container = document.querySelector('.container__canvas')
+        container.appendChild(canvas)
+        this.duration = Date.now() + 10 * 1000
+        this.confettiHandler()
       }
+    },
+
+    confettiHandler() {
+      const colors = ['#bb0000', '#ffffff']
+      const end = Date.now() + 10 * 1000
+
+      ;(function frame() {
+        confetti({
+          particleCount: 2,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors,
+        })
+        confetti({
+          particleCount: 2,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors,
+        })
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame)
+        }
+      })()
     },
 
     animationHandler() {
@@ -265,6 +299,15 @@ $color-white: #e0e0e2;
   background-image: url('~assets/images/WappieBingo.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+
+  &__canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -10;
+  }
 
   &__wap {
     position: absolute;

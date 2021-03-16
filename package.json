@@ -12,6 +12,7 @@
     "lint": "npm run lint:js && npm run lint:style"
   },
   "dependencies": {
+    "canvas-confetti": "^1.4.0",
     "core-js": "^3.6.5",
     "gsap": "^3.6.0",
     "nuxt": "^2.14.6"
