@@ -89,7 +89,7 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-family: 'Schoolbell', cursive;
+  font-family: sans-serif;
   font-size: 100%;
   vertical-align: baseline;
 }

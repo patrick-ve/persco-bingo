@@ -4,15 +4,14 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'De grote Corona Wappie Bingo',
+    title: 'De grote Corona Wappie Bingo 4.0',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
         name: 'description',
-        content:
-          'Om corona toch wat draaglijk te maken, is er nu de corona wappie bingo.',
+        content: 'Alle wappies verzamelen!',
       },
       {
         name: 'theme-color',
@@ -22,8 +21,7 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
-        href:
-          'https://fonts.googleapis.com/css2?family=Schoolbell&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Anton&display=swap',
         rel: 'stylesheet',
       },
     ],

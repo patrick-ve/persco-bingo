@@ -1,33 +1,33 @@
 <template>
   <main class="container">
-    <div class="container__logo">
-      <img
-        src="https://www.rivm.nl/themes/custom/sdv_theme/logo.svg"
-        alt="Niet het logo van het RIVM"
-      />
-    </div>
-    <div class="container__rutte js-animation">
-      <img src="@/assets/images/mark_rutte.png" alt="DE MARK" />
-    </div>
-    <div class="container__video">
+    <!-- <div class="container__video">
       <video src="@/assets/images/video.mp4"></video>
-    </div>
+    </div> -->
+    <!-- Wappies -->
+    <span class="container__wap">WAP</span>
+    <span class="container__pie">PIE</span>
+    <span class="container__bingo">BINGO</span>
+
+    <div class="container__wappie container__wappie--jayjay js-jayjay"></div>
+    <div class="container__wappie container__wappie--jensen js-jensen"></div>
+    <div class="container__wappie container__wappie--baudet js-baudet"></div>
+    <div
+      class="container__wappie container__wappie--ossenbaard js-ossenbaard"
+    ></div>
+    <div class="container__wappie container__wappie--engel js-engel"></div>
+    <div class="container__wappie container__wappie--haga js-haga"></div>
+    <div class="container__wappie container__wappie--frans js-frans"></div>
+    <div class="container__wappie container__wappie--tinus js-tinus"></div>
+
     <div class="container__grid">
-      <div
-        v-for="letter in title"
-        :key="letter.id"
-        class="container__letter"
-        :class="letter"
-      >
-        {{ letter }}
-      </div>
       <button
         v-for="item in items"
         :key="item.id"
+        :class="{ 'text-large': item.bigSize }"
         class="container__item"
         @click="
           item.pressed = true
-          playAudio()
+          audioHandler()
         "
       >
         <p>{{ item.description }}</p>
@@ -65,127 +65,134 @@ export default {
       title: ['B', 'I', 'N', 'G', 'O'],
       items: [
         {
-          description: 'Gejank over vaccins',
+          description: '"...op persoonlijke titel"',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Angstporno',
+          description: 'Zegt Cojona',
+          bigSize: true,
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Ontwijkt als je om de bron vraagt',
+          description: 'Noemt zichzelf strijder',
+          bigSize: true,
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'begrijpt het concept van vvmu niet',
+          description: 'Gejank over fraude',
+          bigSize: true,
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: '"Ik stel alleen maar vragen"',
+          description: 'Noemt alles fascist of communist',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Ad hominem',
+          description: 'DoE eIgEn OnDeRzOeK',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'doe je eigen onderzoek',
+          description: 'Er is geen oversterfte',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Gejank over Antifa/BLM',
+          description: 'Ivermectine, Remdesvir, HCQ',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Gejank over de NWO',
+          description: 'Big Pharma',
+          bigSize: true,
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: '"Ik heb wel wat beters te doen. Fijne avond verder"',
+          description: 'Vaccin voorkomt geen besmetting',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: '"Neem dat prikkie lekker"',
+          description: 'DICTATUUR',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Gebruikt communisme als algemeen scheldwoord',
+          description: 'Mondluier',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'SCHAAP!!1',
+          description: 'SCHAAP!',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: '"Trump kan nog steeds winnen"',
+          description: 'TRIBUNAAL!!!',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: '"deze huisarts zegt..."',
+          description: 'vaccin = gentherapie',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Link naar NineForNews/Bataafse Courant/Random blogje',
-          pressed: false,
-          rotation: Math.floor(Math.random() * 359) + 1,
-        },
-        {
-          description: 'Gejank over censuur',
+          description: 'Angstvirus of Psychose',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
           description: 'Great Reset',
+          bigSize: true,
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Wacht maar/we gaan het zien',
+          description: 'MEDIA = VIRUS',
+          bigSize: true,
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: '"Krijg je betaald om te tweeten?"',
+          description: 'Nee, jij bent de echte wappie',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Agenda 21/30',
+          description: 'Soros',
+          bigSize: true,
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: '#OPRUTTE',
+          description: '"Met of aan corona?!!"',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'Zegt geen MSM te volgen, comment onder elk NOS-artikel',
+          description: '#StemZeWeg',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'mondluier',
+          description: 'Gejank over de (r)overheid',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
         {
-          description: 'VOLKSOPSTAND',
+          description: '"Het is maar een griepje"',
+          pressed: false,
+          rotation: Math.floor(Math.random() * 359) + 1,
+        },
+        {
+          description: 'SLAAP LEKKER/ FIJNE DAG',
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
         },
@@ -203,7 +210,7 @@ export default {
       done()
     },
 
-    playAudio() {
+    audioHandler() {
       this.counter++
       const audio = document.querySelector('audio')
       if (this.AUDIO_ALLOWED) {
@@ -264,47 +271,119 @@ $color-white: #e0e0e2;
   position: relative;
   width: 100vw;
   height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
   background-color: $color-yellow;
+  display: grid;
+  place-items: center;
+  background-image: url('~assets/images/WappieBingo.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 
-  &__logo {
+  // &__video {
+  //   z-index: 20;
+  //   position: absolute;
+  //   display: grid;
+  //   place-items: center;
+  //   left: 0;
+  //   top: 0;
+  //   height: 100vh;
+  //   width: 100vw;
+  //   pointer-events: none;
+  //   opacity: 0;
+
+  //   & video {
+  //     width: 100%;
+  //     height: calc(100% * 16 / 9);
+  //   }
+  // }
+
+  &__wap {
     position: absolute;
-    top: 0;
-    left: 47.5%;
+    left: 32.5vw;
+    top: 1.25vh;
+    font-size: 5rem;
+    letter-spacing: 12px;
+    color: red;
+  }
 
-    &::after {
-      content: 'De grote Corona Wappie Bingo';
-      position: absolute;
-      color: white;
-      left: 120%;
-      top: 20%;
-      font-size: 1.5rem;
-      width: 20rem;
+  &__pie {
+    position: absolute;
+    right: 35vw;
+    top: 1.25vh;
+    font-size: 5rem;
+    letter-spacing: 12px;
+    color: red;
+  }
+
+  &__bingo {
+    position: absolute;
+    bottom: 1vh;
+    left: 56.5%;
+    transform: translate(-56.5%);
+    font-size: 5rem;
+    letter-spacing: 72px;
+    color: red;
+    z-index: 10;
+  }
+
+  &__wappie {
+    position: absolute;
+    width: 15vw;
+    height: 15vw;
+    background-size: cover;
+
+    &--jayjay {
+      left: 20vw;
+      top: 0;
+      background-image: url('~assets/images/Tisjeboy.png');
     }
-  }
 
-  &__rutte {
-    z-index: 1;
-    position: absolute;
-    top: 10%;
-    left: 20%;
-  }
+    &--jensen {
+      left: 42.5vw;
+      top: 0;
+      height: 7.5vw;
+      width: 15vw;
+      background-image: url('~assets/images/Robert_Jensen.png');
+    }
 
-  &__video {
-    z-index: 20;
-    position: absolute;
-    display: grid;
-    place-items: center;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 100vw;
-    pointer-events: none;
-    opacity: 0;
+    &--baudet {
+      right: 22.5vw;
+      top: 0;
+      background-image: url('~assets/images/Thierry_Bidet.png');
+    }
 
-    & video {
-      width: 100%;
-      height: calc(100% * 16 / 9);
+    &--ossenbaard {
+      right: 21.5vw;
+      top: 30vh;
+      background-image: url('~assets/images/Janet_Ossebaard.png');
+    }
+
+    &--engel {
+      right: 20.5vw;
+      bottom: 0;
+      height: 10vw;
+      width: 15vw;
+      background-image: url('~assets/images/Villain_Engel.png');
+    }
+
+    &--haga {
+      right: 42.5vw;
+      bottom: 0;
+      height: 7.5vw;
+      width: 15vw;
+      background-image: url('~assets/images/Wybren_van_Haga.png');
+    }
+
+    &--frans {
+      left: 20vw;
+      bottom: 0;
+      background-image: url('~assets/images/Lamme_Frans.png');
+    }
+
+    &--tinus {
+      left: 21vw;
+      bottom: 35vh;
+      background-image: url('~assets/images/Staatsmongool_Tinus.png');
     }
   }
 
@@ -329,24 +408,32 @@ $color-white: #e0e0e2;
     position: relative;
     z-index: 2;
     margin: 0 auto;
-    padding-top: 10vh;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-    width: 80vw;
-    height: 90vh;
+    grid-template-rows: repeat(5, 1fr);
+    width: 45vw;
+    height: 45vw;
     text-align: center;
+    border: 7px solid red;
   }
 
   &__item {
     background-color: white;
     color: $color-blue;
-    border: 3px solid black;
+    border: 2px solid black;
     font-size: 1.25rem;
     cursor: pointer;
-    padding: 1rem;
     position: relative;
-    font-weight: bold;
+    font-weight: regular;
+
+    & p {
+      display: block;
+      margin: 0 auto;
+      padding-left: 0.45rem;
+      padding-right: 0.45rem;
+      width: 100%;
+      text-align: center;
+    }
 
     & span {
       position: absolute;
@@ -359,24 +446,8 @@ $color-white: #e0e0e2;
   }
 }
 
-.B {
-  background-color: $color-blue;
-}
-
-.I {
-  background-color: $color-green;
-}
-
-.N {
-  background-color: $color-red;
-}
-
-.G {
-  background-color: purple;
-}
-
-.O {
-  background-color: rgb(255, 187, 0);
+.text-large {
+  font-size: 2.25rem;
 }
 
 button {
