@@ -1,7 +1,7 @@
 <template>
   <main class="container">
-    <span class="container__wap">WAP</span>
-    <span class="container__pie">PIE</span>
+    <span class="container__wap js-wap">WAP</span>
+    <span class="container__pie js-pie">PIE</span>
     <span class="container__bingo">BINGO</span>
 
     <div class="container__canvas"></div>
@@ -24,7 +24,7 @@
         :class="{ 'text-large': item.bigSize }"
         class="container__item"
         @click="
-          item.pressed = true
+          item.pressed = !item.pressed
           audioHandler(item)
         "
       >
@@ -33,6 +33,7 @@
           :css="false"
           @before-enter="beforeEnterAnimation"
           @enter="enterAnimation"
+          @leave="leaveAnimation"
         >
           <span
             v-if="item.pressed"
@@ -53,6 +54,7 @@
     <audio class="js-audio" src="fart.mp3"></audio>
     <audio class="js-audio" src="x-files-theme.mp3"></audio>
     <audio class="js-audio" src="clown_horn.mp3"></audio>
+    <audio class="js-audio" src="feesboek.mp3"></audio>
     <audio class="js-circus" src="circus_theme.mp3"></audio>
   </main>
 </template>
@@ -211,22 +213,35 @@ export default {
     },
 
     enterAnimation(el, done) {
-      gsap.to(el, { autoAlpha: 1, ease: 'back', duration: 1.2 })
-      done()
+      gsap.to(el, {
+        autoAlpha: 1,
+        ease: 'back',
+        duration: 1.2,
+        onComplete: done,
+      })
+    },
+
+    leaveAnimation(el, done) {
+      gsap.to(el, {
+        autoAlpha: 0,
+        ease: 'back',
+        duration: 1.2,
+        onComplete: done,
+      })
     },
 
     audioHandler(item) {
-      this.counter++
+      item.pressed ? this.counter++ : this.counter--
 
       if (item.reset) {
         this.counter = 0
 
-        const canvas = document.querySelector('canvas')
-        canvas.remove()
-
         this.items.forEach((item) => {
           item.pressed = false
         })
+
+        const cirusTheme = this.$el.querySelector('.js-circus')
+        cirusTheme.pause()
       }
 
       const audioEffects = gsap.utils.toArray('.js-audio')
@@ -243,26 +258,27 @@ export default {
         this.confettiHandler()
 
         const cirusTheme = this.$el.querySelector('.js-circus')
+        cirusTheme.currentTime = 0
         cirusTheme.play()
       }
     },
 
     confettiHandler() {
       const colors = ['#bb0000', '#ffff00', '#0000ff']
-      const end = Date.now() + 10 * 1000
+      const end = Date.now() + 30 * 1000
 
       ;(function animate() {
         confetti({
           particleCount: 2,
           angle: 60,
-          spread: 55,
+          spread: 69,
           origin: { x: 0 },
           colors,
         })
         confetti({
           particleCount: 2,
           angle: 120,
-          spread: 55,
+          spread: 69,
           origin: { x: 1 },
           colors,
         })
