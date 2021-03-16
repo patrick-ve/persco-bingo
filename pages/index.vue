@@ -1,9 +1,5 @@
 <template>
   <main class="container">
-    <span class="container__wap js-wap">WAP</span>
-    <span class="container__pie js-pie">PIE</span>
-    <span class="container__bingo">BINGO</span>
-
     <div class="container__canvas"></div>
 
     <div class="container__wappie container__wappie--jayjay js-jayjay"></div>
@@ -18,6 +14,9 @@
     <div class="container__wappie container__wappie--tinus js-tinus"></div>
 
     <div class="container__grid">
+      <span class="container__wap js-wap">WAP</span>
+      <span class="container__pie js-pie">PIE</span>
+      <span class="container__bingo">BINGO</span>
       <button
         v-for="item in items"
         :key="item.id"
@@ -207,6 +206,10 @@ export default {
     }
   },
 
+  mounted() {
+    this.loadingAnimationHandler()
+  },
+
   methods: {
     beforeEnterAnimation(el) {
       gsap.set(el, { autoAlpha: 0 })
@@ -227,6 +230,18 @@ export default {
         ease: 'back',
         duration: 1.2,
         onComplete: done,
+      })
+    },
+
+    loadingAnimationHandler() {
+      const wap = this.$el.querySelector('.js-wap')
+      const pie = this.$el.querySelector('.js-pie')
+
+      gsap.to([wap, pie], {
+        yPercent: -115,
+        stagger: 0.5,
+        ease: 'expo.inOut',
+        delay: 0.8,
       })
     },
 
@@ -332,8 +347,8 @@ $color-white: #e0e0e2;
 
   &__wap {
     position: absolute;
-    left: 32.5vw;
-    top: 1.25vh;
+    left: 10%;
+    top: 0;
     font-size: 5rem;
     letter-spacing: 12px;
     color: red;
@@ -341,8 +356,8 @@ $color-white: #e0e0e2;
 
   &__pie {
     position: absolute;
-    right: 35vw;
-    top: 1.25vh;
+    right: 14.5%;
+    top: 0;
     font-size: 5rem;
     letter-spacing: 12px;
     color: red;
@@ -350,11 +365,10 @@ $color-white: #e0e0e2;
 
   &__bingo {
     position: absolute;
-    bottom: 1vh;
-    left: 56.5%;
-    transform: translate(-56.5%);
+    bottom: -12.5%;
+    left: 10%;
     font-size: 5rem;
-    letter-spacing: 72px;
+    letter-spacing: 88px;
     color: red;
     z-index: 10;
   }
@@ -444,8 +458,8 @@ $color-white: #e0e0e2;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    width: 45vw;
-    height: 45vw;
+    width: 80vh;
+    height: 80vh;
     text-align: center;
     border: 7px solid red;
   }
