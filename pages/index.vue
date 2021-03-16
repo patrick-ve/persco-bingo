@@ -1,9 +1,5 @@
 <template>
   <main class="container">
-    <!-- <div class="container__video">
-      <video src="@/assets/images/video.mp4"></video>
-    </div> -->
-    <!-- Wappies -->
     <span class="container__wap">WAP</span>
     <span class="container__pie">PIE</span>
     <span class="container__bingo">BINGO</span>
@@ -27,7 +23,7 @@
         class="container__item"
         @click="
           item.pressed = true
-          audioHandler()
+          audioHandler(item)
         "
       >
         <p>{{ item.description }}</p>
@@ -50,7 +46,10 @@
       </button>
     </div>
 
-    <audio src="buzzer.mp3"></audio>
+    <audio class="js-audio" src="baby_cry.mp3"></audio>
+    <audio class="js-audio" src="buzzer.mp3"></audio>
+    <audio class="js-audio" src="fart.mp3"></audio>
+    <audio class="js-audio" src="x-files-theme.mp3"></audio>
   </main>
 </template>
 
@@ -62,7 +61,6 @@ export default {
     return {
       AUDIO_ALLOWED: true,
       counter: 0,
-      title: ['B', 'I', 'N', 'G', 'O'],
       items: [
         {
           description: '"...op persoonlijke titel"',
@@ -153,6 +151,7 @@ export default {
           bigSize: true,
           pressed: false,
           rotation: Math.floor(Math.random() * 359) + 1,
+          reset: true,
         },
         {
           description: 'MEDIA = VIRUS',
@@ -210,40 +209,28 @@ export default {
       done()
     },
 
-    audioHandler() {
+    audioHandler(item) {
       this.counter++
-      const audio = document.querySelector('audio')
-      if (this.AUDIO_ALLOWED) {
-        audio.play()
-      } else {
-        return
+
+      if (item.reset) {
+        this.counter = 0
+        this.items.forEach((item) => {
+          item.pressed = false
+        })
       }
 
-      if (this.counter === 8) {
-        const bingoLetter = this.$el.querySelector('.O')
-        bingoLetter.textContent = ''
-        bingoLetter.style.backgroundSize = 'cover'
-        bingoLetter.style.backgroundPosition = 'center'
-        bingoLetter.style.backgroundImage =
-          "url('https://www.vkmag.com/images/vk_thumbs/79041/thumb_fl_remix__vk_thumb_item.jpg')"
+      const audioEffects = gsap.utils.toArray('.js-audio')
+      const randomAudio =
+        audioEffects[Math.floor(Math.random() * audioEffects.length)]
+
+      randomAudio.play()
+
+      if (item.reset) {
+        this.counter = 0
       }
 
       if (this.counter === 12) {
         this.animationHandler()
-      }
-
-      if (this.counter === 25) {
-        const videoContainer = this.$el.querySelector('.container__video')
-        const video = videoContainer.querySelector('video')
-        gsap.set(videoContainer, { autoAlpha: 1 })
-        video.play()
-      }
-
-      if (this.counter === 5) {
-        const fifthLetter = this.$el.querySelector(
-          '.container__letter:nth-of-type(4)'
-        )
-        fifthLetter.textContent = '5G'
       }
     },
 
@@ -278,24 +265,6 @@ $color-white: #e0e0e2;
   background-image: url('~assets/images/WappieBingo.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-
-  // &__video {
-  //   z-index: 20;
-  //   position: absolute;
-  //   display: grid;
-  //   place-items: center;
-  //   left: 0;
-  //   top: 0;
-  //   height: 100vh;
-  //   width: 100vw;
-  //   pointer-events: none;
-  //   opacity: 0;
-
-  //   & video {
-  //     width: 100%;
-  //     height: calc(100% * 16 / 9);
-  //   }
-  // }
 
   &__wap {
     position: absolute;
@@ -419,7 +388,7 @@ $color-white: #e0e0e2;
 
   &__item {
     background-color: white;
-    color: $color-blue;
+    color: black;
     border: 2px solid black;
     font-size: 1.25rem;
     cursor: pointer;
