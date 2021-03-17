@@ -262,12 +262,6 @@ export default {
       item.pressed ? this.counter++ : this.counter--
 
       if (item.reset) {
-        if (this.counter >= 5) {
-          const bingo = this.$el.querySelector('.js-bingo')
-          bingo.textContent = 'BINGO'
-          gsap.to(bingo, { xPercent: 0 })
-        }
-
         this.counter = 0
 
         this.items.forEach((item) => {
@@ -287,7 +281,7 @@ export default {
       if (this.counter === 5) {
         const bingo = this.$el.querySelector('.js-bingo')
         bingo.textContent = '   5G'
-        gsap.to(bingo, { xPercent: 150 })
+        gsap.to(bingo, { xPercent: 40 })
       }
 
       if (this.counter === 24) {
@@ -402,7 +396,7 @@ main {
 
   &__wap {
     position: absolute;
-    left: 10%;
+    left: 12.5%;
     top: 0;
     font-size: 5rem;
     letter-spacing: 12px;
@@ -446,8 +440,9 @@ main {
 
   &__bingo {
     position: absolute;
-    bottom: -11.5%;
-    left: 12.5%;
+    left: 57.5%;
+    top: 106%;
+    transform: translate(-50%, -50%);
     font-size: 5rem;
     letter-spacing: 88px;
     opacity: 0;
@@ -458,6 +453,7 @@ main {
     @include phone {
       left: 0;
       top: 5vh;
+      transform: translate(0, 0);
       font-size: 3rem;
       letter-spacing: 12px;
       width: 100vw;
@@ -488,8 +484,9 @@ main {
     }
 
     &--jensen {
-      left: 35%;
+      left: 50%;
       top: -15%;
+      transform: translate(-50%, 15%);
       height: 7.5vw;
       width: 15vw;
       background-image: url('~assets/images/Robert_Jensen.png');
@@ -499,6 +496,7 @@ main {
         height: 25vw;
         left: 30vw;
         top: 25vh;
+        transform: translate(0, 0);
       }
     }
 
@@ -546,8 +544,9 @@ main {
     }
 
     &--haga {
-      right: 35%;
-      bottom: -15%;
+      left: 47.5%;
+      bottom: -12.5%;
+      transform: translate(-47.5%, 12.5%);
       height: 7.5vw;
       width: 15vw;
       background-image: url('~assets/images/Wybren_van_Haga.png');
@@ -643,11 +642,13 @@ main {
     background-color: white;
     color: black;
     border: 2px solid black;
-    font-size: 1.25rem;
+    font-size: 1.25vw;
     position: relative;
     font-weight: regular;
-    max-width: 100%;
+    width: calc(80vh / 5);
+    height: calc(80vh / 5);
     cursor: pointer;
+    overflow-wrap: break-word;
 
     @include phone {
       min-height: 20vh;
@@ -656,6 +657,7 @@ main {
     }
 
     & p {
+      font-size: 1.25rem;
       display: block;
       margin: 0 auto;
       padding-left: 0.45rem;
@@ -676,7 +678,11 @@ main {
 }
 
 .text-large {
-  font-size: 2.25rem;
+  font-size: 1.75rem;
+
+  & p {
+    font-size: 1.75rem;
+  }
 
   @include phone {
     font-size: 10vw;
