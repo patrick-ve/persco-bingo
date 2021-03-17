@@ -304,20 +304,20 @@ export default {
         cirusTheme.play()
 
         // Handle animations
-        const villains = gsap.utils.toArray('.js-wappie')
-        const tl = gsap.timeline()
-        tl.fromTo(
-          villains,
+        gsap.fromTo(
+          '.js-wappie',
           {
-            y: -5,
+            y: () => gsap.utils.random(-10, -5),
+            rotate: () => gsap.utils.random(-4, -2),
           },
           {
-            y: 5,
+            y: () => gsap.utils.random(5, 10),
+            rotate: () => gsap.utils.random(2, 4),
             repeat: -1,
             yoyo: true,
-            duration: 0.8,
+            duration: () => gsap.utils.random(0.4, 1),
             stagger: 0.1,
-            ease: 'back',
+            ease: 'bounce.out',
           }
         )
       }
