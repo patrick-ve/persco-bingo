@@ -2,18 +2,16 @@
   <main class="container">
     <div class="container__canvas"></div>
     <div class="container__grid">
-      <div class="container__wappie container__wappie--jayjay js-jayjay"></div>
-      <div class="container__wappie container__wappie--jensen js-jensen"></div>
-      <div class="container__wappie container__wappie--baudet js-baudet"></div>
-      <div
-        class="container__wappie container__wappie--ossenbaard js-ossenbaard"
-      ></div>
-      <div class="container__wappie container__wappie--engel js-engel"></div>
-      <div class="container__wappie container__wappie--haga js-haga"></div>
-      <div class="container__wappie container__wappie--frans js-frans"></div>
-      <div class="container__wappie container__wappie--tinus js-tinus"></div>
+      <div class="container__wappie container__wappie--haga js-wappie"></div>
+      <div class="container__wappie container__wappie--engel js-wappie"></div>
+      <div class="container__wappie container__wappie--jayjay js-wappie"></div>
+      <div class="container__wappie container__wappie--jensen js-wappie"></div>
+      <div class="container__wappie container__wappie--baudet js-wappie"></div>
+      <div class="container__wappie container__wappie--ossenbaard"></div>
+      <div class="container__wappie container__wappie--tinus"></div>
+      <div class="container__wappie container__wappie--frans js-wappie"></div>
 
-      <span class="container__wap js-wap">WAP</span>
+      <span class="container__wap js-wap">WAP<em>PIE</em></span>
       <span class="container__pie js-pie">PIE</span>
       <span class="container__bingo js-bingo">BINGO</span>
       <button
@@ -237,6 +235,7 @@ export default {
       const bingo = this.$el.querySelector('.js-bingo')
 
       gsap.to([wap, pie], {
+        autoAlpha: 1,
         yPercent: -115,
         stagger: 0.5,
         ease: 'expo.inOut',
@@ -292,15 +291,35 @@ export default {
       }
 
       if (this.counter === 24) {
+        // Create canvas and handle confetti
         const canvas = document.createElement('canvas')
         const container = document.querySelector('.container__canvas')
         container.appendChild(canvas)
         this.duration = Date.now() + 10 * 1000
         this.confettiHandler()
 
+        // Clown theme starts here
         const cirusTheme = this.$el.querySelector('.js-circus')
         cirusTheme.currentTime = 0
         cirusTheme.play()
+
+        // Handle animations
+        const villains = gsap.utils.toArray('.js-wappie')
+        const tl = gsap.timeline()
+        tl.fromTo(
+          villains,
+          {
+            y: -5,
+          },
+          {
+            y: 5,
+            repeat: -1,
+            yoyo: true,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'back',
+          }
+        )
       }
     },
 
@@ -344,11 +363,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color-red: #721817;
-$color-yellow: #fa9f42;
-$color-blue: #2b4162;
-$color-green: #0b6e4f;
-$color-white: #e0e0e2;
+@mixin phone {
+  @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+    @content;
+  }
+}
 
 main {
   cursor: url('/illuminati_cursor.png') !important;
@@ -359,12 +378,18 @@ main {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background-color: $color-yellow;
+  background-color: red;
   display: grid;
   place-items: center;
   background-image: url('~assets/images/WappieBingo.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+
+  @include phone {
+    overflow: visible;
+    overflow-x: hidden;
+    background-size: contain;
+  }
 
   &__canvas {
     position: absolute;
@@ -382,6 +407,26 @@ main {
     font-size: 5rem;
     letter-spacing: 12px;
     color: red;
+    opacity: 0;
+    visibility: hidden;
+
+    & em {
+      display: none;
+
+      @include phone {
+        display: inline;
+        font-style: normal;
+        font-weight: bold;
+      }
+    }
+
+    @include phone {
+      left: 0;
+      top: 5vh;
+      font-size: 3rem;
+      width: 100vw;
+      font-weight: bold;
+    }
   }
 
   &__pie {
@@ -391,6 +436,12 @@ main {
     font-size: 5rem;
     letter-spacing: 12px;
     color: red;
+    opacity: 0;
+    visibility: hidden;
+
+    @include phone {
+      display: none;
+    }
   }
 
   &__bingo {
@@ -403,6 +454,16 @@ main {
     visibility: hidden;
     color: red;
     z-index: 10;
+
+    @include phone {
+      left: 0;
+      top: 5vh;
+      font-size: 3rem;
+      letter-spacing: 12px;
+      width: 100vw;
+      pointer-events: none;
+      font-weight: bold;
+    }
   }
 
   &__wappie {
@@ -416,6 +477,14 @@ main {
       left: -17.5%;
       top: -15%;
       background-image: url('~assets/images/Tisjeboy.png');
+
+      @include phone {
+        width: 40vw;
+        height: 40vw;
+        left: 40vw;
+        top: 17.5%;
+        transform: rotate(30deg);
+      }
     }
 
     &--jensen {
@@ -424,18 +493,41 @@ main {
       height: 7.5vw;
       width: 15vw;
       background-image: url('~assets/images/Robert_Jensen.png');
+
+      @include phone {
+        width: 40vw;
+        height: 25vw;
+        left: 30vw;
+        top: 25vh;
+      }
     }
 
     &--baudet {
       right: -15%;
       top: -15%;
       background-image: url('~assets/images/Thierry_Bidet.png');
+
+      @include phone {
+        left: 45vw;
+        top: 22.5vh;
+        width: 40vw;
+        height: 40vw;
+        transform: rotate(-30deg);
+      }
     }
 
     &--ossenbaard {
       right: -15%;
       top: 30%;
       background-image: url('~assets/images/Janet_Ossebaard.png');
+
+      @include phone {
+        left: 55vw;
+        top: 17.5vh;
+        width: 50vw;
+        height: 50vw;
+        transform: rotate(-30deg);
+      }
     }
 
     &--engel {
@@ -444,6 +536,13 @@ main {
       height: 10vw;
       width: 15vw;
       background-image: url('~assets/images/Villain_Engel.png');
+
+      @include phone {
+        right: 30%;
+        top: 10%;
+        width: 70vw;
+        height: 50vw;
+      }
     }
 
     &--haga {
@@ -452,18 +551,40 @@ main {
       height: 7.5vw;
       width: 15vw;
       background-image: url('~assets/images/Wybren_van_Haga.png');
+
+      @include phone {
+        right: 67.5%;
+        top: 16.5%;
+        width: 35vw;
+        height: 25vw;
+      }
     }
 
     &--frans {
       left: -22.5%;
       bottom: -15%;
       background-image: url('~assets/images/Lamme_Frans.png');
+
+      @include phone {
+        left: 0%;
+        top: 18.5%;
+        width: 40vw;
+        height: 40vw;
+      }
     }
 
     &--tinus {
       left: -15%;
       top: 30%;
       background-image: url('~assets/images/Staatsmongool_Tinus.png');
+
+      @include phone {
+        left: 5%;
+        top: 20%;
+        width: 40vw;
+        height: 40vw;
+        transform: rotate(60deg);
+      }
     }
   }
 
@@ -495,6 +616,12 @@ main {
     text-align: center;
     z-index: 20;
 
+    @include phone {
+      padding-top: 35vh;
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(1fr);
+    }
+
     &::before {
       position: absolute;
       content: '';
@@ -505,6 +632,10 @@ main {
       border: 7px solid red;
       z-index: 50;
       pointer-events: none;
+
+      @include phone {
+        display: none;
+      }
     }
   }
 
@@ -515,7 +646,14 @@ main {
     font-size: 1.25rem;
     position: relative;
     font-weight: regular;
+    max-width: 100%;
     cursor: pointer;
+
+    @include phone {
+      min-height: 20vh;
+      width: 100vw;
+      font-size: 6.5vw;
+    }
 
     & p {
       display: block;
@@ -531,7 +669,7 @@ main {
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      color: $color-red;
+      color: red;
       font-size: 5rem;
     }
   }
@@ -539,6 +677,10 @@ main {
 
 .text-large {
   font-size: 2.25rem;
+
+  @include phone {
+    font-size: 10vw;
+  }
 }
 
 button {
@@ -568,33 +710,19 @@ button:focus {
   outline: none;
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
-  .container__grid {
-    padding-top: 50vh;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(1fr);
-  }
+// @media (min-width: 320px) and (max-width: 480px) {
+//   .container {
+//     overflow: initial;
+//   }
+// }
+// .container__grid {
+//   padding-top: 50vh;
+//   grid-template-columns: repeat(1, 1fr);
+//   grid-template-rows: repeat(1fr);
+// }
 
-  .container__item {
-    min-height: 20vh;
-  }
-
-  .container__rutte {
-    bottom: 50vh;
-    left: -25vw;
-    transform: scale(0.7);
-  }
-
-  .container__logo::after {
-    font-size: 1rem;
-    width: 30vw;
-  }
-
-  .container__video {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-}
+// .container__item {
+//   min-height: 20vh;
+//   width: 100vw;
+// }
 </style>
